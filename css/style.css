@@ -1,0 +1,13 @@
+body {
+	background-color: #f0f0f0;
+}
+
+div#container {
+    margin: 64px auto;
+    padding: 5px;
+    width: 960px;
+    min-height: 360px;
+    text-align: center;
+    background-color: #ffffff;
+    box-shadow: 5px 5px 3px #aaaaaa;
+}
