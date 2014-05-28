@@ -169,4 +169,3 @@ What is an app without proper styling? Modify your `css/style.css` file to your 
 - Left-align the notelist
 - Remove bullets from the notelist
 - Highlight the currently selected note
-- 
