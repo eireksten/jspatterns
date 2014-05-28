@@ -122,11 +122,11 @@ function (target) {
     
     target.off = function (type, func) {
         var listeners = events[type] || [],
-            i = list.length = func ? listeners.length : 0;
+            i = listeners.length = func ? listeners.length : 0;
         
         while (i-- > 0) {
-          if (func === list[i].fun) {
-                list.splice(i,1);
+          if (func === listeners[i].fun) {
+                listeners.splice(i,1);
           }
         }
     };
@@ -153,7 +153,11 @@ Then,
 
 ## Exercise 8 - Extending the Notebook
 
-Now that we have the basics in place, you can extend the notebook with the following
+We still have a problem with the button 'New Note', where the note list component explicitly modifies the note component. This need to be addressed.
+
+One solution is to create a layout component that spans the whole notebook, containing both subcomponents (or possibly with the button as a third component). The button should then emit an event when a new note is to be created, and the super component could create a new note when this happens. This component would in effect be the whole app, so you could alternatively use app.js to handle this event.
+
+Another solution is to introduce a notelist model (see below) that contains both a reference to all notes and the one that is selected. When the selected note changes, the note component should update itself based on the data in the new related model. Adding a new note would then be as simple as creating a new model and selecting it in the note list model.
 
 #### Maintaining a list of notes
 
@@ -171,3 +175,17 @@ What is an app without proper styling? Modify your `css/style.css` file to your 
 - Left-align the notelist
 - Remove bullets from the notelist
 - Highlight the currently selected note
+- Highlight notes on mouseover
+- 
+
+#### Deleting notes
+
+Now that the notebook is looking awesome, you could try expanding it to include note deletion.
+
+#### Data Persistence
+
+When refreshing the page, all your notes will disappear. You could try storing the models in the browsers localstorage (https://developer.mozilla.org/en-US/docs/Web/Guide/API/DOM/Storage). Persistence functionality typically belongs to the model module, and all other parts of your system should be oblivious to how it is done.
+
+One way of approaching this is to store the model data on every change, while retrieving them upon page load (from app.js).
+
+This will sadly require you to create your own web server to serve the app (ie. using express.js, http://expressjs.com/guide.html)

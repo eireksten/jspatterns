@@ -8,8 +8,8 @@ steria.controllers = (function ($) {
 		render: function () {
 			this.$element.empty().html(
 				steria.templates.note({
-					name: '',
-					content: ''
+					name: this.model.getName(),
+					content: this.model.getContent()
 				})
 			);
 
@@ -20,10 +20,7 @@ steria.controllers = (function ($) {
 		},
 		nameChanged: function () {
 			var name = this.$notename.val().trim();
-			if (name.length === 0) {
-				name = "My Note";
-			}
-			$('h3').text(name);
+			this.model.setName(name);
 		}
 	};
 
@@ -31,36 +28,47 @@ steria.controllers = (function ($) {
 		render: function () {
 			this.$element.empty().html(
 				steria.templates.notelist({
-					notename: 'My Note'
+					notename: this.model.getName()
 				})
 			);
 			this.$header = this.$element.find('h3');
 			this.$newbutton = this.$element.find('button');
 		},
 		bindEvents: function () {
+
 			this.$newbutton.click(this.newnote.bind(this));
+			this.model.on('change:name', this.render.bind(this));
+
 		},
 		newnote: function () {
+			// TODO Separate Concerns!
 			steria.controllers.createNote($('.note'));
 		}
 	};
 
 
 	return {
-		createNote: function ($element) {
+		createNote: function (model, $element) {
+			model = model || steria.models.createNote();
+			$element = $element || $('<div>').addClass('note');
+
 			var obj = Object.create(notecontroller);
 
 			obj.$element = $element;
+			obj.model = model;
+			
 			obj.render();
 			obj.bindEvents();
 
 			return obj;
 
 		},
-		createNotelist: function ($element) {
+		createNotelist: function (model, $element) {
 			var obj = Object.create(notelistcontroller);
 
 			obj.$element = $element;
+			obj.model = model;
+
 			obj.render();
 			obj.bindEvents();
 
