@@ -1,6 +1,7 @@
 Zepto(function () {
 	"use strict";
 
-    steria.initializeControllers();
+    steria.controllers.createNotelist($('.notelist'));
+    steria.controllers.createNote($('.note'));
 
 });
