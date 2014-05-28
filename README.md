@@ -36,7 +36,7 @@ Fix the jshint errors.
 
 Modify `app.js` and `index.html`, implementing the following using jquery and zepto:
 
-1. Include zepto / jquery from [http://cdnjs.com](http://cdnjs.com)
+1. Download zepto / jquery and put it in the js/lib directory. Include it from index.html.
 2. Move the script tag to the head of the file, and use the document ready event from zepto/jQuery.
 3. Create a header and a text field for the name of the note
 4. Update the header whenever the text field changes
