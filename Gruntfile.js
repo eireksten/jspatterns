@@ -13,7 +13,7 @@ module.exports = function(grunt) {
         strict: true,
         browser: true,
         devel: true,
-        predef: ['Zepto', '$', '_'],
+        predef: ['Zepto', 'jQuery', '$', '_'],
         ignores: ['js/templates.js']
       },
       src: ['js/*.js']
