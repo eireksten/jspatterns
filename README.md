@@ -176,7 +176,6 @@ What is an app without proper styling? Modify your `css/style.css` file to your 
 - Remove bullets from the notelist
 - Highlight the currently selected note
 - Highlight notes on mouseover
-- 
 
 #### Deleting notes
 
