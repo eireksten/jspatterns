@@ -36,7 +36,7 @@ Fix the jshint errors.
 
 Modify `app.js` and `index.html`, implementing the following using jquery and zepto:
 
-1. Download zepto / jquery and put it in the js/lib directory. Include it from index.html.
+1. Download zepto / jquery (ie. from http://cdnjs.cloudflare.com/ajax/libs/zepto/1.1.3/zepto.min.js) and put it in the js/lib directory. Include it from index.html.
 2. Move the script tag to the head of the file, and use the document ready event from zepto/jQuery.
 3. Create a header and a text field for the name of the note
 4. Update the header whenever the text field changes
@@ -93,10 +93,12 @@ grunt.registerTask('default', ['jshint', 'handlebars']);
 
 ```
 
-1. Move the html for both the note and note lists into separate template (*.hbs) files in the templates directory (create it).
-2. Render the component from javascript (add a render method to the controller objects)!
-3. Add the component elements to the page from your `app.js`
-4. Add a 'New Note' button (or link) to the note list
+1. Download handlebars.js (http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.3.0/handlebars.js) and include both this and `js/templates.js` in your index.html file.
+2. Run grunt to precompile the templates into javascript.
+3. Move the html for both the note and note lists into separate template (*.hbs) files in the templates directory (create it).
+4. Render the component from javascript (add a render method to the controller objects)!
+5. Add the component elements to the page from your `app.js`
+6. Add a 'New Note' button (or link) to the note list
   * Should reset the note when clicked
 
 

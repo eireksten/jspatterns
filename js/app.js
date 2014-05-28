@@ -1,3 +1,5 @@
+/*global steria */
+
 Zepto(function () {
 	"use strict";
 

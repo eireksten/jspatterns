@@ -17,11 +17,26 @@ module.exports = function(grunt) {
         ignores: ['js/templates.js']
       },
       src: ['js/*.js']
+    },
+    handlebars: {
+      options: {
+        namespace: 'steria.templates',
+        processName: function (filepath) {
+          return filepath.substring(filepath.lastIndexOf('/') + 1, filepath.lastIndexOf('.'));
+        }
+      },
+      build: {
+        dest: "js/templates.js",
+        src: [
+          "templates/*.hbs"
+        ]
+      }
     }
   });
 
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-handlebars');
 
-  grunt.registerTask('default', ['jshint']);
+  grunt.registerTask('default', ['jshint', 'handlebars']);
 
 };

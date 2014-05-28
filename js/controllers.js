@@ -2,9 +2,17 @@ var steria = steria || {};
 steria.controllers = steria.controllers || {};
 
 steria.controllers = (function ($) {
+	"use strict";
 
 	var notecontroller = {
-		cacheElements: function () {
+		render: function () {
+			this.$element.empty().html(
+				steria.templates.note({
+					name: '',
+					content: ''
+				})
+			);
+
 			this.$notename = this.$element.find('.notename');
 		},
 		bindEvents: function () {
@@ -13,18 +21,27 @@ steria.controllers = (function ($) {
 		nameChanged: function () {
 			var name = this.$notename.val().trim();
 			if (name.length === 0) {
-				name = "New Note";
+				name = "My Note";
 			}
 			$('h3').text(name);
 		}
-	}
+	};
 
 	var notelistcontroller = {
-		cacheElements: function () {
+		render: function () {
+			this.$element.empty().html(
+				steria.templates.notelist({
+					notename: 'My Note'
+				})
+			);
 			this.$header = this.$element.find('h3');
+			this.$newbutton = this.$element.find('button');
 		},
 		bindEvents: function () {
-
+			this.$newbutton.click(this.newnote.bind(this));
+		},
+		newnote: function () {
+			steria.controllers.createNote($('.note'));
 		}
 	};
 
@@ -34,7 +51,7 @@ steria.controllers = (function ($) {
 			var obj = Object.create(notecontroller);
 
 			obj.$element = $element;
-			obj.cacheElements();
+			obj.render();
 			obj.bindEvents();
 
 			return obj;
@@ -44,7 +61,7 @@ steria.controllers = (function ($) {
 			var obj = Object.create(notelistcontroller);
 
 			obj.$element = $element;
-			obj.cacheElements();
+			obj.render();
 			obj.bindEvents();
 
 			return obj;
