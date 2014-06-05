@@ -37,6 +37,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-handlebars');
 
-  grunt.registerTask('default', ['jshint', 'handlebars']);
+  grunt.registerTask('default', []); // ['jshint', 'handlebars']
 
 };

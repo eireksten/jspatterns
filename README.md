@@ -11,7 +11,6 @@ Run the following commands in the shell (from where you want your project to be 
 npm install -g grunt-cli
 git clone https://github.com/eireksten/jspatterns.git
 cd jspatterns
-git checkout 987cb349dfca3f7b011be61a742fde92ec5df7c5
 npm install
 grunt
 ```
@@ -21,15 +20,9 @@ Running the grunt command should output "Done, without errors". Now, open the fi
 
 ## Exercise 2 - JSHint
 
-From the project directory, run the following commands. Your grunt configuration now contains JSHint, and you will receive an error report upon building.
+We now want to run JSHint on our project. Open `Gruntfile.js` and change the line `grunt.registerTask('default', []);` to `grunt.registerTask('default', ['jshint']);`. Then run the command `grunt` from the command line.
 
-```shell
-git checkout c874f73c761a10c38fb4e76b1f8335d22dbac5e2
-npm install
-grunt
-```
-
-Fix the jshint errors.
+This should output a few jslint errors in the file `js/app.js`. Fix these errors.
 
 
 ## Exercise 3 - Zepto/jQuery
@@ -144,6 +137,7 @@ function (target) {
 ```
 
 Then,
+
 1. Create a data model object for a note
   - Should store the name and contents of the note.
   - Have it emit events on change

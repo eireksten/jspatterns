@@ -4,11 +4,38 @@ body {
 
 div#container {
     margin: 64px auto;
-    padding: 5px;
+    padding: 10px;
     width: 95%;
     max-width: 960px;
     min-height: 360px;
-    text-align: center;
     background-color: #ffffff;
     box-shadow: 5px 5px 3px #aaaaaa;
+}
+
+div.notelist {
+	float: left;
+	width: 192px;
+	margin-right: 32px;
+	margin-bottom: 16px;
+}
+
+div.notelist ul {
+	list-style-type: none;
+	padding-left: 8px;
+}
+
+div.notelist ul li {
+	font-family: serif;
+	text-transform: uppercase;
+
+}
+
+div.notelist li:hover {
+	color: blue;
+	cursor: pointer;
+}
+
+div.note {
+	float: left;
+	margin-top: 16px;
 }

@@ -1,11 +1,15 @@
-/*global steria */
+(function () {
 
-Zepto(function () {
-	"use strict";
+    fibonacci = function (num) {
+	    if (num == 0) {
+		    return 0;
+	    } else if (num == 1) {
+	  	    return 1;
+	    }
+	    return fibonacci(num-1) + fibonacci(num-2);
+    }
 
-	var note = steria.models.createNote();
+    var container = document.getElementById('container');
+    container.innerHTML = '<p>The 8th Fibonacci number is ' + fibonacci(8) + '!</p>';
 
-    steria.controllers.createNotelist(note, $('.notelist'));
-    steria.controllers.createNote(note, $('.note'));
-
-});
+}());
