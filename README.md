@@ -29,12 +29,11 @@ This should output a few jslint errors in the file `js/app.js`. Fix these errors
 
 Modify `app.js` and `index.html`, implementing the following using jquery and zepto:
 
-1. Download zepto / jquery (ie. from http://cdnjs.cloudflare.com/ajax/libs/zepto/1.1.3/zepto.min.js) and put it in the js/lib directory. Include it from index.html.
-2. Move the script tag to the head of the file, and use the document ready event from zepto/jQuery.
-3. Create a header and a text field for the name of the note
-4. Update the header whenever the text field changes
-5. Create a text area for the note contents
-6. [Optional] Use the first line in the text area as note name.
+1. Move the script tag to the head of the file, and use the document ready event from zepto/jQuery.
+2. Create a header for displaying the note name and a text field for editing the name of the note.
+3. Update the header whenever the text field changes.
+4. Create a text area for the note contents.
+5. [Optional] Use the first line in the text area as note name instead of a separate file.
 
 
 ## Exercise 4 - Module Pattern
@@ -55,43 +54,13 @@ Can you spot a problem with the current structuring of the application?
 
 ## Exercise 6 - Client Side Templating
 
-* Run the following command in the shell
+Now its time to update our project to support handlebars templates. Open `Gruntfile.js` and change the line `grunt.registerTask('default', ['jshint']);` to `grunt.registerTask('default', ['jshint', 'handlebars']);`. Then run the command `grunt` from the command line.
 
-```shell
-npm install grunt-contrib-handlebars --save-dev
-```
-
-* Add the following config to your `Gruntfile.js`
-
-```javascript
-// Added to initConfig:
-handlebars: {
-  options: {
-    namespace: 'steria.templates',
-    processName: function (filepath) {
-      return filepath.substring(filepath.lastIndexOf('/') + 1, filepath.lastIndexOf('.'));
-    }
-  },
-  build: {
-    dest: "js/templates.js",
-    src: [
-      "templates/*.hbs"
-    ]
-  }
-}
-
-// Adding the task
-grunt.loadNpmTasks('grunt-contrib-handlebars');
-grunt.registerTask('default', ['jshint', 'handlebars']);
-
-```
-
-1. Download handlebars.js (http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.3.0/handlebars.js) and include both this and `js/templates.js` in your index.html file.
-2. Run grunt to precompile the templates into javascript.
-3. Move the html for both the note and note lists into separate template (*.hbs) files in the templates directory (create it).
-4. Render the component from javascript (add a render method to the controller objects)!
-5. Add the component elements to the page from your `app.js`
-6. Add a 'New Note' button (or link) to the note list
+1. Run grunt to precompile the templates into javascript.
+2. Move the html for both the note and note lists into their corresponding templates/*.hbs files.
+3. Add a render method to the controller objects. Generate the html for the component in this method and store it in the controller objects element field!
+4. Add the component elements to the page from your `app.js` file
+5. Add a 'New Note' button (or link) to the note list
   * Should reset the note when clicked
 
 
@@ -151,7 +120,7 @@ We still have a problem with the button 'New Note', where the note list componen
 
 One solution is to create a layout component that spans the whole notebook, containing both subcomponents (or possibly with the button as a third component). The button should then emit an event when a new note is to be created, and the super component could create a new note when this happens. This component would in effect be the whole app, so you could alternatively use app.js to handle this event.
 
-Another solution is to introduce a notelist model (see below) that contains both a reference to all notes and the one that is selected. When the selected note changes, the note component should update itself based on the data in the new related model. Adding a new note would then be as simple as creating a new model and selecting it in the note list model.
+Another solution is to allow a notelist model (see below) to contain a reference to the currently selected note. When the selected note changes, it should trigger an event and the note component should update itself based on the data in the new related model. Adding a new note would then be as simple as creating a new model and selecting it in the note list model.
 
 #### Maintaining a list of notes
 
@@ -164,12 +133,7 @@ We still only have support for a single note at a time. To increase usability, w
 
 #### Styling
 
-What is an app without proper styling? Modify your `css/style.css` file to your own preferences. You could for instance try achieving the following things.
-
-- Left-align the notelist
-- Remove bullets from the notelist
-- Highlight the currently selected note
-- Highlight notes on mouseover
+What is an app without proper styling? Modify your `css/style.css` file to your own preferences. An example of a shortcoming in the current design is that the selected note isn't highlighted in the list.
 
 #### Deleting notes
 
