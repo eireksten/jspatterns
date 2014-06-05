@@ -27,7 +27,7 @@ This should output a few jslint errors in the file `js/app.js`. Fix these errors
 
 ## Exercise 3 - Zepto/jQuery
 
-Modify `app.js` and `index.html`, implementing the following using jquery and zepto:
+Modify `app.js` and `index.html`, implementing the following using jquery or zepto:
 
 1. Move the script tag to the head of the file, and use the document ready event from zepto/jQuery.
 2. Create a header for displaying the note name and a text field for editing the name of the note.
