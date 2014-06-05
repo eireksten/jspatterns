@@ -60,58 +60,18 @@ Now its time to update our project to support handlebars templates. Open `Gruntf
 2. Move the html for both the note and note lists into their corresponding templates/*.hbs files.
 3. Add a render method to the controller objects. Generate the html for the component in this method and store it in the controller objects element field!
 4. Add the component elements to the page from your `app.js` file
-5. Add a 'New Note' button (or link) to the note list
-  * Should reset the note when clicked
+5. Add a 'Clear Note' button (or link) to the note, with the obvious functionality
 
 
 ## Exercise 7 - Data Binding
 
-First, create a module for the event emitter
-
-```javascript
-function (target) {
-    "use strict";
-
-    var events = {};
-
-    target.on = function (type, func, ctx) {
-        events[type] = events[type] || [];
-        events[type].push({
-            fun: func,
-            ctx: ctx
-        });
-    };
-    
-    target.off = function (type, func) {
-        var listeners = events[type] || [],
-            i = listeners.length = func ? listeners.length : 0;
-        
-        while (i-- > 0) {
-          if (func === listeners[i].fun) {
-                listeners.splice(i,1);
-          }
-        }
-    };
-    
-    target.emit = function () { // emit(type, args...)
-        var args = Array.apply([], arguments),
-            listeners = events[args.shift()] || [], 
-            i;
-
-        for (i = 0; i < listeners.length; i++) {
-            listeners[i].fun.apply(listeners[i].ctx, args);
-        }
-    };
-}
-```
-
-Then,
+This project includes an event mixin that can add the event functions `on`, `off` and `emit` on an object. It can be used by calling `steria.eventsmixin(object);` on the object you want to enable the events functionality on.
 
 1. Create a data model object for a note
   - Should store the name and contents of the note.
   - Have it emit events on change
-2. Pass this data model object to the controllers
-3. Have controller objects update their own views upon model change
+2. Pass this data model object to the controllers and have them store a reference to it.
+3. Have controller objects update their own views upon model change, by listening to the events triggered by the data object.
 
 
 ## Exercise 8 - Extending the Notebook
@@ -127,9 +87,10 @@ Another solution is to allow a notelist model (see below) to contain a reference
 We still only have support for a single note at a time. To increase usability, we want to be able to maintain a whole list of notes at a time.
 
 - Introduce a notelist model, and have the notelist reference this instead of a single note.
+- Expand the notelist with functionality for adding a new note (not yet selecting it).
 - The notelist model should relay change events from all its sub models (the notes).
-- The notelist controller needs to listen to events on its new model
-- When selecting a note in the notelist (in the browser), the app needs to show the correct note in the editor.
+- The notelist controller needs to listen to events on its new model.
+- When selecting a note in the notelist (in the browser), the app needs to show the correct note in the editor. Also, when editing a note, the correct entry needs to be updated.
 
 #### Styling
 
